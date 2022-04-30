@@ -1,18 +1,20 @@
-#include "shaderClass.h"
-#include <string.h>
+#include"shaderClass.h"
+
 // Reads a text file and outputs a string with everything in the text file
-std::string get_file_contents(const char* filename) {
-  std::ifstream in(filename, std::ios::binary);
-  if (in) {
-    std::string contents;
-    in.seekg(0, std::ios::end);
-    contents.resize(in.tellg());
-    in.seekg(0, std::ios::beg);
-    in.read(&contents[0], contents.size());
-    in.close();
-    return (contents);
-  }
-  throw(errno);
+std::string get_file_contents(const char* filename)
+{
+	std::ifstream in(filename, std::ios::binary);
+	if (in)
+	{
+		std::string contents;
+		in.seekg(0, std::ios::end);
+		contents.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&contents[0], contents.size());
+		in.close();
+		return(contents);
+	}
+	throw(errno);
 }
 
 // Constructor that build the Shader Program from 2 different shaders
@@ -61,10 +63,16 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 }
 
 // Activates the Shader Program
-void Shader::Activate() { glUseProgram(ID); }
+void Shader::Activate()
+{
+	glUseProgram(ID);
+}
 
 // Deletes the Shader Program
-void Shader::Delete() { glDeleteProgram(ID); }
+void Shader::Delete()
+{
+	glDeleteProgram(ID);
+}
 
 // Checks if the different Shaders have compiled properly
 void Shader::compileErrors(unsigned int shader, const char* type)
@@ -73,7 +81,7 @@ void Shader::compileErrors(unsigned int shader, const char* type)
 	GLint hasCompiled;
 	// Character array to store error message in
 	char infoLog[1024];
-	if (strcmp(type, "PROGRAM") == 0)
+	if (strcmp(type, "PROGRAM"))
 	{
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &hasCompiled);
 		if (hasCompiled == GL_FALSE)
