@@ -34,3 +34,4 @@
 .vscode
 app.dSYM
 app
+.DS_Store
